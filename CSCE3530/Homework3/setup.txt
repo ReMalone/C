@@ -1,0 +1,11 @@
+cd DHCPServer
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/DHCPServer.d" -MT"src/DHCPServer.d" -o "src/DHCPServer.o" "src/DHCPServer.c"
+gcc  -o "DHCPServer"  ./src/DHCPServer.o
+./DHCPServer 5000
+cd DHCPClient
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/DHCPClient.d" -MT"src/DHCPClient.d" -o "src/DHCPClient.o" "src/DHCPClient.c"  
+gcc  -o "DHCPClient"  ./src/DHCPClient.o
+.DHCPClient 5000
+
+Please change #define SERVER in source code of client to IP of your server before compiling 
+
