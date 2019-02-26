@@ -1,0 +1,49 @@
+/*
+ *Robert Malone	
+ * CSCE 1030 
+ * 3/27/2013
+ *
+ */
+ 
+#include <stdio.h> 
+ 
+int main(){
+
+ int start, num,x, num1, factorial,y;
+ factorial = 1; 
+ y = 1;
+ 
+  printf("Robert Malone CSCE 1030 Lab 8\n\n");
+  
+  printf("Enter starting number: ");
+  scanf("%d", &start);
+  printf("Enter a second number: ");
+  scanf("%d", &num);
+  
+  
+ while(start<num){
+  for(x=0;start<num;x++){
+   if(start%2==1)    
+     printf("%d,",start);
+     start+=1;       
+   } 
+   printf("\n");
+  }
+  
+  printf("Enter a number: ");
+  scanf("%d", &num1);
+    
+  do{
+   factorial *= y;
+   y++;
+   }while(y<=num1);
+  
+  printf("%d! = %d\n",num1,factorial); 
+   
+  
+  
+  
+
+ return 0;
+}    
+ 

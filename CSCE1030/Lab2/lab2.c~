@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+ int main() {
+
+  int Income;
+  float IncomeTax, SStax, Med, Net, NewIncome;
+
+  printf("Robert Malone CSCE 1030, darkgenezis@gmail.com\n"); // Starting off with who I am
+
+  printf("How much money do you make a month?: ");
+   scanf("%d",&Income);
+
+ IncomeTax = Income * .05;
+  printf(" %.2f Has been deducted from your Income due to taxs!\n", IncomeTax);
+ 
+ SStax = Income * .0765; 
+  printf("%.2f Has been deducted from your Income due to SS!\n", SStax);
+ 
+ NewIncome = Income - IncomeTax - SStax;
+ Med = NewIncome  - 300;
+  printf("$300 has been deducted due to medical and dental!\n");
+  
+ Net = Med;
+  printf("You now have this much money left after the taxes have been deducted: %.2f \n", Net); 
+       
+  
+
+return 0;
+}

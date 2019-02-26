@@ -1,0 +1,46 @@
+/*
+ *Author: Robert Malone(darkgenezis@gmail.com)
+ *Class: CSCE 1030
+ *Date: 3/20/13
+ *
+ *
+ */
+ 
+#include <stdio.h>
+
+#define PROMPT ("Enter a number: ")
+#define prompt ("Enter another number: ")
+#define DISPLAY printf
+#define ADD(num1,num2) ((num1)+(num2))
+#define SUB(num1,num2) ((num1)-(num2))
+#define MULT(num1,num2) ((num1)*(num2))
+#define DIV(num1,num2) ((num1)/(num2))
+#define MOD(num1,num2) ((num1)%(num2))
+
+int main(){
+ 
+ int num1, num2, sum;
+ char op;
+ char enter;
+  
+  DISPLAY (PROMPT);
+  scanf("%d%c", &num1,&enter);
+  
+  DISPLAY (prompt);
+  scanf("%d%c", &num2,&enter);
+  
+ printf("Enter an operator: ");
+  scanf("%c", &op);
+  
+  switch (op) {
+    case '+': sum = ADD(num1,num2); DISPLAY("Result: %d + %d = %d\n ",num1,num2,sum); break;
+    case '-': sum = SUB(num1,num2); DISPLAY("Result: %d - %d = %d\n ",num1,num2,sum); break;
+    case '*': sum = MULT(num1,num2); DISPLAY("Result: %d * %d = %d\n ",num1,num2,sum); break;
+    case '/': sum = DIV(num1,num2); DISPLAY("Result: %d / %d = %d\n ",num1,num2,sum); break;
+    case '%': sum = MOD(num1,num2); DISPLAY("Result: %d %% %d = %d\n ",num1,num2,sum); break;
+    default : printf(" That ain't math dummy!\n\n");
+  }
+  
+  
+return 0;
+}

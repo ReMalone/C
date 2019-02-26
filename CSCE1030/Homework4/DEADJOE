@@ -1,0 +1,71 @@
+
+*** These modified files were found in JOE when it aborted on Fri Mar 29 17:21:23 2013
+*** JOE was aborted by UNIX signal 1
+
+*** File 'Homework4.c'
+
+
+
+#include <stdio.h>
+#include <string.h>
+
+char *encrypt(char *str[],int offset){
+  int x,z;
+  char temp;
+  z = strlen(str);
+  
+ //for (x = 0; x < offset; ++x)
+// temp += 3 +(str - '0');
+  
+  for(x = 0;x<z);++x)
+  {
+   str[x] = str[x] - offset;
+   }
+  
+ printf(" The encrypted text is %s \n\n", str);
+ }
+ 
+ 
+char * decrypt(char str,int offset);
+
+int main(){
+
+//char Alp[26] = "abcdefghijklmnopqrstuvwxyz";
+//char alp[26] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//char alp[42];
+char ch, y;
+int off;
+
+printf("Do you want to encrypt(E) or decrypt(D)?: ");
+ scanf("%c", &ch);
+printf("Enter the Offset number: ");
+ scanf("%d", &off); 
+
+
+ if (ch == 'E'){
+ 
+ printf("what do you wish to encrypt?: ");
+  scanf("%c*c", &y);
+ } 
+ encrypt(y, off);  
+ 
+ 
+ 
+ return 0;
+ }
+ 
+
+
+
+*** File '(Unnamed)'
+Homework4.c
+Homework4.c
+Homework4.c
+Homework4.c
+Homework4.c
+Homework4.c
+Homework4.c
+Homework4.c
+Homework4.c
+Homework4.c
+Homework4.c

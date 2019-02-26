@@ -1,0 +1,13 @@
+total 48
+-rw------- 1 rem0166 rem0166    0 Jan 30  2013 programs
+-rw------- 1 rem0166 rem0166   78 Jan 30 09:50 program
+-rwx------ 1 rem0166 rem0166 7280 Sep 11 09:41 b
+-rw------- 1 rem0166 rem0166  214 Sep 11 09:26 decrypt.c
+-rw------- 1 rem0166 rem0166  278 Sep 11 09:26 prime.c
+-rw------- 1 rem0166 rem0166  333 Sep 11 09:26 printArgs.c
+-rw------- 1 rem0166 rem0166  611 Sep 11 09:26 dice.c
+drwx------ 2 rem0166 rem0166 4096 Sep 11 09:26 CStrings
+-rw------- 1 rem0166 rem0166  481 Sep 11 09:26 brokenDice.c
+-rw------- 1 rem0166 rem0166  746 Sep 11 09:26 minmax.c
+-rw------- 1 rem0166 rem0166  511 Sep 11 09:26 permute.c
+-rw------- 1 rem0166 rem0166  240 Sep 11 09:26 ceasar.c

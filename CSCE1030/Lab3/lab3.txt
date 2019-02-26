@@ -1,0 +1,5 @@
+
+Enter the radius of a circle: 10
+The circumference of the circle is: 62.83
+The area of the circle is: 314.159
+The rounded ratio of area to circumference is: 5

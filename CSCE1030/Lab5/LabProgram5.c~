@@ -1,0 +1,66 @@
+
+
+#include <stdio.h>
+
+
+int main(){
+
+   int Money;
+   char ch;
+   float CER, USD;
+   
+   printf("Robert Malone CSCE 1030, darkgenezis@gmail.com\n\n");
+   printf("This program is a currency exchange calculator, which\n");
+   printf("changes one country's currency to US dollars\n");
+   
+   printf("Please enter a country name: ");
+    scanf("%c", &ch);
+    
+    if (ch == 'B')
+     {
+      printf(">>>Changing Brazilian currency to US dollars>>>\n");
+      printf("What's today's exchange rate(USD:Brazilian): ");
+       scanf("%f", &CER);
+      printf("How much do you want to change: ");
+       scanf("%d", &Money);
+      USD = Money / CER;
+      printf(" From    To        CER      Money        USD\n");
+      printf("---------------------------------------------\n");
+      printf("Brazil   USD       2.0301      %d        %.4f \n", Money, USD);
+      }
+     else if (ch == 'C')
+      {
+      printf(">>>Changing Canadian currency to US dollars>>>\n");
+      printf("What's today's exchange rate(USD:Canadian): ");
+       scanf("%f", &CER);
+      printf("How much do you want to change: ");
+       scanf("%d", &Money);
+      USD = Money / CER;
+      printf(" From    To        CER      Money        USD\n");
+      printf("---------------------------------------------\n");
+      printf("Canadian   USD      0.9789      %d        %.4f \n", Money, USD);
+      }                                                         
+     else if (ch == 'M')
+      {
+      printf(">>>Changing Mexican Peso to US dollars>>>\n");
+      printf("What's today's exchange rate(USD:Peso): ");
+       scanf("%f", &CER);
+      printf("How much do you want to change: ");
+       scanf("%d", &Money);
+      USD = Money / CER;
+      printf(" From    To        CER      Money        USD\n");
+      printf("---------------------------------------------\n");
+      printf(" MP   USD         13.7955      %d        %.4f \n", Money, USD);
+      }
+      else if (ch == 'A')
+      {
+       printf("You can't a US dollar to a US dollar dummy!\n");
+      }
+     else
+      printf("We ain't taking your money! We don't want it!\n\n"); 
+                                                              
+      
+      
+  return 0;
+  
+}  
