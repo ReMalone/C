@@ -1,0 +1,260 @@
+
+*** These modified files were found in JOE when it aborted on Thu Nov 21 14:02:07 2013
+*** JOE was aborted because the terminal closed
+
+*** File 'main.c'
+#include "stack.c"
+#include "assert.h"
+
+
+// ****************************************************************
+//
+//  main.c --- Read regular expression input and then produce a 
+//             Non-Deterministic Automata (NFA) the accepts the
+//             same language as the input RegExp.
+//
+//  A regular expression consists of the following symbols
+//
+//            upper-case letters, A-Z  each letter represents an
+//            element of the set of symbols for the regular expression
+//
+//            +  represents an OR operation
+//            *  represents Kleene Closure (0 or more occurances of a
+//               regular expression
+//	      ;  catentation (combining two regular expressions 
+//               "in order"   R1 ; R2  means have the combined
+//               expresion  should be R1R2
+//            e  for the empty string
+//
+// ****************************************************************
+
+int mapLetter2Int(char, char[], int);
+//extern int printTable(int[][26], char [], int, int, int, int);
+int printTable(int table[][26], char variables[], int initialState, int finalState, int numRows, int numColumns)
+{
+    int i,j;
+
+    printf("\t\t\tThe NFA in table form is:\n\n");
+// printf header row
+
+   printf("State number");
+   for( j = 0; j < numColumns; j++)
+       printf("\t%c",variables[j]);
+   printf("\te1\te2\te3\n");
+
+// now for the table data
+   for(i = 0; i < numRows; i++ )
+   {
+       printf("   q%d\t",i);
+       for(j = 0; j < numColumns+3; j++)
+	       if( table[i][j] != -1 )
+               printf("\tq%d",table[i][j]);
+           else
+	       printf("\t"); 
+       printf("\n");
+   }
+   printf("The initial state is %d\n",initialState);
+   printf("The final state is %d\n",finalState);
+}
+
+
+void buildNFA(char[], char[], int);
+
+
+int main()
+{
+    char c;
+    char buffer[81];
+    int  letters[26];
+    char columns[26];
+    int  i, index; 
+
+
+// Read the regular expression
+    for(i = 0; i < 26; i++)
+        letters[i] = 0;
+    i = 0;
+    while( scanf("%c",&c) != EOF )
+    {
+        if( isupper(c) )
+        { 
+            buffer[i++] = c;
+            letters[c-'A']++;
+        }
+        else if( c == ';' )
+            buffer[i++] = ';';
+        else if( c == '+' )
+            buffer[i++] = '+';
+        else if( c == '*' )
+            buffer[i++] = '*';
+        else if( c == '(' )
+            buffer[i++] = '(';
+        else if( c == ')' )
+            buffer[i++] = ')';
+        else if( c == 'e' )
+            buffer[i++] = 'e';
+        // else do nothing
+    }
+    buffer[i++] = '\0';
+
+    index = 0;
+    for(i = 0; i < 26; i++)
+        if(letters[i] > 0 )
+        {
+	    columns[index++] = 'A' + i;
+        }
+        columns[index] = 'e';
+        columns[index+1] = 'e';
+        columns[index+2] = 'e';
+        columns[index+3] = 'e';
+
+    buildNFA(buffer,columns,index);
+    return 0;
+}
+
+int mapLetter2Int(char c, char inputs[], int size)
+{
+   int i;
+   for(i = 0; i < size; i++)
+       if( c == inputs[i] ) return i;
+   assert(0); 
+}
+
+void buildNFA(char regEx[], char variables[], int columns)
+{
+    int i = 0, istate, fstate;
+    int row, col, end;
+    int stateNumber;
+    int stateTable[500][26];
+    int temp1Start, temp2Start, temp1End, temp2End;
+    char c;
+
+    for(row = 0; row < 500; row++)
+    {
+        for(col = 0; col < 26; col++)
+        {
+            stateTable[row][col] = -1;
+        }
+    }
+//    printf("In buildNFA and input Regular Expression is %s\n",regEx);    
+
+    i = strlen(regEx) - 1;
+    initCharStack();
+    while( i >= 0 )
+    { 
+	c = regEx[i];
+        pushChar(c);
+        i--;
+    }
+    printCharStack();
+
+    stateNumber = 0;
+    initStack();
+    end = strlen(regEx);
+    i = 0;
+    while( i < end )
+    { 
+	c = regEx[i];
+        if( isupper(c) )
+        {
+		// build a two-state NFA like Figure 3.16 (c)
+		stateTable[stateNumber]
+			  [mapLetter2Int(c,variables,columns)] = stateNumber+1;
+                push(stateNumber);
+                push(stateNumber+1);
+                stateNumber += 2; 
+        }
+        else if( c == 'e' )
+        {
+		// build a two-state NFA like Figure 3.16 (a)
+		stateTable[stateNumber][columns] = stateNumber+1;
+                push(stateNumber);
+                push(stateNumber+1);
+                stateNumber += 2;
+        }
+        else if( c == ';' )
+        {
+		// build a new NFA following Figure 3.17 (b)
+                temp2End = pop();
+                temp2Start = pop();
+                temp1End = pop();
+                temp1Start = pop();
+                stateTable[temp1End][columns] = temp2Start;
+                push(temp1Start);
+                push(temp2End);
+        }
+        else if( c == '+' )
+        {
+		// build a new NFA following Figure 3.17 (a)
+                temp2End = pop();
+                temp2Start = pop();
+                temp1End = pop();
+                temp1Start = pop();
+                stateTable[stateNumber][columns] = temp1Start;
+                stateTable[stateNumber][columns+1] = temp2Start;
+                stateTable[temp1End][columns] = stateNumber+1;
+                stateTable[temp2End][columns+1] = stateNumber+1;
+                push(stateNumber);
+                push(stateNumber+1);
+                stateNumber++;
+                stateNumber++;
+        }
+        else if( c == '*' )
+        {
+		// build a new NFA following Figure 3.17 (c)
+                temp1End = pop();
+                temp1Start = pop();
+                stateTable[stateNumber][columns] = temp1Start;
+                stateTable[stateNumber][columns+1] = stateNumber+1;
+                stateTable[temp1End][columns] = temp1Start;
+                stateTable[temp1End][columns+1] = stateNumber+1;
+                push(stateNumber);
+                push(stateNumber+1);
+                stateNumber++;
+                stateNumber++;
+        }
+        else
+	    assert(0);
+	i++;
+    }
+    fstate = pop();
+    istate = pop();
+    printTable(stateTable,variables,istate,fstate,stateNumber,columns);
+}
+
+int debug()
+{
+    printStack();
+    return 19;
+}
+
+*** File '(Unnamed)'
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part3B.c
+main.c
+
+*** These modified files were found in JOE when it aborted on Thu Nov 21 22:07:06 2013
+*** JOE was aborted because the terminal closed
+
+*** File 'epi.c'
+the
+*** File '(Unnamed)'
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part3B.c
+epi.c

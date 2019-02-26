@@ -1,0 +1,66 @@
+
+*** These modified files were found in JOE when it aborted on Thu Dec  5 02:18:26 2013
+*** JOE was aborted because the terminal closed
+
+*** File '(Unnamed)'
+part2B.c
+part2B.c
+part2B.c
+part2B.c
+part3B.c
+epi.c
+code.c
+printTable2.c
+main.c
+DFA.c
+MajorAssignment4.c
+
+*** These modified files were found in JOE when it aborted on Thu Dec  5 03:34:53 2013
+*** JOE was aborted by UNIX signal 1
+
+*** File '(Unnamed)'
+Major4.c
+
+*** File 'Major4.c'
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+ struct person{
+   char *name;
+     float total;
+       struct person *parent;
+       };
+       
+       
+       
+       int main(){
+       
+         struct person *root;
+           struct person *next;
+             char c[500];
+               float balance;
+                 char status[500];
+                 
+                   scanf("%d", &balance);
+                     root = malloc(sizeof(struct person));
+                       scanf("%s", root->name);
+                       
+                         next=root;
+                         
+                         while(scanf("%s%s", c, status) != EOF){
+                         
+                           printf("%s ", c);
+                             printf("%4s\n", status);
+                             
+                             
+                             }
+                             
+                             
+                             return 0;
+                             }
+*** These modified files were found in JOE when it aborted on Thu Dec  5 04:50:09 2013
+*** JOE was aborted by UNIX signal 1
+
+*** File '(Unnamed)'
+Major4.c
