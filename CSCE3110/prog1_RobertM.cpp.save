@@ -1,0 +1,198 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <memory.h>
+using namespace std;
+
+template <class T>
+class OrderedCollection{
+  private:
+  unsigned size;
+  unsigned maxSZ;
+  T *data;
+
+  private:
+  void Init();
+  void Free();
+  bool Invalid(int Num){return(Num >= 0 && Num < size) ? true:false;}
+  void insert(int capacity, const T &t){
+    for(int x = size-1; x >= capacity; --x){
+	data[x+1] = data[x];
+      }
+       data[capacity] = t;
+     }
+
+  public:
+  OrderedCollection(){Init();}
+  OrderedCollection(int total, const T &t);
+  OrderedCollection(const OrderedCollection &oc);
+  OrderedCollection& operator=(const OrderedCollection &oc);
+  T& operator[](int Num);
+
+  ~OrderedCollection(){Free();};
+
+  bool isEmpty() const{return size==0;}
+  bool makeEmpty(){size=0;}
+  unsigned getSize() const{return size;}
+  bool makeEmpty(){size=0;}
+  void insert(int capacity, const T &t);
+  void remove(int capacity);
+  bool contains(const T &t) const;
+  T& findMin();
+  T& findMax();
+
+  void print()const
+   {
+     for(int x=0; x<size; ++x)
+	cout <<  data[x] << " ";
+	cout << endl;
+   }
+
+
+  //void isEmpty(Node *head)const;	//Checks if collection is empty
+  //void makeEmpty()			//Makes the collection empty
+  //void insert(int x);			//Insert value into collection
+  //void remove(int );			//Remove value from collection
+  //void findMin(int );			//Find Minimum input value
+  //void findMax(int );			//Find maximum input value
+
+};
+
+ template <class T>
+ void OrderedCollection<T>::Init(){
+   size = 0;
+   maxSZ = 1;
+   data = new T[maxSZ];
+}
+
+ template <class T>
+ void OrderedCollection<T>::Free(){
+  delete[] data;
+}
+
+ template <class T>
+ OrderedCollection<T>::OrderedCollection(int total, const T &t){
+  if(size == 0)
+     Init();
+  else
+   {
+      size = total;
+      maxSZ = total*2;
+      data = new T[maxSZ];
+      for(int x=0; x<total; ++x)
+       data[x] = t;
+   }
+}
+
+ template <class T>
+ OrderedCollection<T>::OrderedCollection(const OrderCollection &oc){
+    size = oc.size;
+    maxSZ = oc.maxSZ;
+    data = new T[maxSZ];
+    memcpy(data, oc.data, size*sizeof(T));
+}
+
+ template <class T>
+ OrderedCollection<T>& OrderedCollection<T>::operator=(const OrderedCollection<T> &t){
+   if(this == &t)
+     return *this;
+   size = t.size;
+   maxSZ = t.maxSZ;
+   T *tmp = new T[maxSZ];
+   memcpy(tmp, t.data, size*sizeof(T));
+   delete[] data;
+   data = tmp;
+   return *this;
+}
+
+ template <class T>
+ t& OrderedCollection<T>::operator[](int Num){
+  if(Num < 0 || Num >= size){
+    cout << "Out of range." << endl;
+    return data[size];
+  }
+  return data[Num];
+}
+
+ template <class T>
+ void OrderedCollection<T>::insert(int c, const T &t){
+  if(capacity < 0 || capacity >= size){
+    cout << "Not inserted" << endl;
+    return;
+   }
+    else{
+    cout << "Input inserted" << endl;
+   }
+   if(size < maxSZ){
+   insert(capacity, t);
+   }
+    else{
+    maxSZ = 2*maxSZ;
+    t *tmp = new t[maxSZ];
+    memcpy(tmp, data, size*sizeof(t));
+    delete[] data;
+    data = tmp;
+    insert(Num, t);
+   }
+  ++size;
+}
+
+ template <class T>
+ void OrderedCollection<T>::remove(int capacity){
+   if(InvalidIndex(capacity)){
+      if(capacity == size){
+       --size;
+      }
+   else{
+   for(int x = capacity; x<size; ++x)
+	data[x] = data[x+1]
+	--size;
+       }
+     }
+   else{
+    cout << "Nothing found, not removed" << endl;
+    return;
+  }
+}
+
+ template <class T>
+ bool OrderedCollection<T>::contains(const T &t) const{
+	int temp = 0;
+	for(int x=0; x<size; ++x){
+	   if(data[x] == t)
+		++data;
+         }
+	if(temp == 1)
+	   return true;
+	else
+	   return false;
+}
+
+ template <class T>
+ t& OrderedCollection<T>::findMax(){
+    int Maximum = 0;
+    for(int x=0; x<size; ++x){
+	if(data[Maximum] > data[x]){
+	 Maximum = x;
+       }
+    }
+   return data[Maximum];
+}
+
+ template <class T>
+ t& OrderedCollection<T>::findMin(){
+ T tmp;
+ int Minimum = 0;
+  for(int x=0; x<size; ++x){
+	if(data[Minimum] < data[x]){
+	  tmp = data[x];
+	  Minimum = x;
+	}
+     }
+   return data[Minimum];
+
+int main(){
+
+
+return 0;
+}

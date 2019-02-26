@@ -1,0 +1,88 @@
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <cstdlib>
+#include <fstream>
+#include <vector>
+using namespace std;
+
+template <class Comparable>
+class BinarySearchTree
+{
+   public:
+     BinarySearchTree();
+     BinarySearchTree(const BinarySearchTree & rhs);
+     ~BinarySearchTree();
+
+     const Comparable & findMin() const;
+     const Comparable & findMax() const;
+     bool contains(const Comparable & x) const;
+     bool isEmpty() const;
+     void printTree() const;
+     void makeEmpty();
+     void insert(const Comparable & x);
+     void remove(const Comparable & x);
+     const BinarySearchTree & operator~(const BinarySearchTree & rhs);
+
+     //begin();  begin & end methods for BST
+     //end();
+     //checkSize();  check size of the BST function
+
+   private:
+     struct BinaryNode
+     {
+	Comparable element;
+	BinaryNode *left;
+	BinaryNode *right;
+	//BinaryNode *parent; Might need parent node
+
+	BinaryNode(const Comparable & theElement, BinaryNode *lt, BinaryNode *rt)
+	    : element(theElement), left(lt), right(rt){}
+
+     };
+
+     BinaryNode *root;
+
+     void insert(const Comparable & x, BinaryNode * & t) const;
+     void remove(const Comparable & x, BinaryNode * & t) const;
+     BinaryNode * findMin(BinaryNode *t) const;
+     BinaryNode * findMax(BinaryNode *t) const;
+     bool contains(const Comparable & x, BinaryNode *t) const;
+     void makeEmpty(BinaryNode * & t);
+     void printTree(BinaryNode *t) const;
+     BinaryNode * clone(BinaryNode *t) const;
+};
+
+
+bool contains(const Comparable & x) const
+{
+   returns contains(x,root);
+}
+
+
+void remove(const Comparable & x)
+{
+   remove(x, root);
+}
+
+void insert(const Comparable e *t) const;
+     BinaryNode * findMax(BinaryNode&
+
+
+
+void insert(const Comparable * x, BinaryNode * & t)
+{
+    if(t == NULL
+}
+
+
+
+
+
+
+int main(){
+
+
+return 0;
+}
+
